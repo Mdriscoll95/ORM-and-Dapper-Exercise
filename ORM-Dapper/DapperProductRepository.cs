@@ -14,10 +14,15 @@ namespace ORM_Dapper
 
         public void CreateProduct(string name, double price, int categoryID)
         {
-            _connection.Execute("INSERT INTO Products (Name, Price, CatgoryID) " +
-                "Values (@name, @price, @catetogory);",
+            _connection.Execute($"INSERT INTO products (Name, Price, CategoryID) " +
+                $"VALUES (@name, @price, @categoryID);",
                 new { name = name, price = price, categoryID = categoryID });
-                ;
+                
+        }
+        public void UpdateProduct(int productID, string updatedName)
+        {
+            _connection.Execute($"UPDATE products SET name = @updatedName WHERE productID = @productID;" ,
+                 new { productID = productID, updatedName = updatedName }) ;
         }
 
         public void DeleteProduct(int productID)
@@ -26,9 +31,14 @@ namespace ORM_Dapper
                 new { productID = productID });
             _connection.Execute("DELETE FROM sales WHERE ProductID = @productID;",
                new { productID = productID });
-            _connection.Execute("DELETE FROM reviews WHERE ProductID = @productID;",
-               new { productID = productID });
+            _connection.Execute("DELETE FROM reviews WHERE ProductID = @productID;" ,
+                new { productID = productID });
+                
+              
+              
         }
+
+        
 
         public IEnumerable<Product> GetAllProducts()
         {

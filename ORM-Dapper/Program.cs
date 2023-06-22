@@ -27,12 +27,10 @@ var prodCat = int.Parse(Console.ReadLine());
 
 repo.CreateProduct(prodName, prodPrice, prodCat);
 
-var prodList = repo.GetAllProducts();
 
-foreach(var prod in prodList)
-{
-    Console.WriteLine($"{prod.ProductID} - {prod.Name}");
-}
+ReadData();
+
+
 Console.WriteLine("what is the Product ID you want to update");
 var prodID = int.Parse(Console.ReadLine());
 
@@ -41,5 +39,52 @@ var newName = Console.ReadLine();
 
 repo.UpdateProduct(prodID, newName);
 
+ReadData();
 Console.WriteLine("what is the product ID you want to delete?");
 prodID = int.Parse(Console.ReadLine());
+repo.DeleteProduct(prodID);
+ReadData();
+
+
+
+Console.ReadLine();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void ReadData()
+{
+    var prodList = repo.GetAllProducts();
+
+    foreach (var prod in prodList)
+    {
+        Console.WriteLine($"{prod.ProductID} - {prod.Name}");
+    }
+}
